@@ -24,8 +24,9 @@ const modules = [
   },
   {
     id: 4,
-    title: "Módulo 4",
-    description: "Funcionalidad por definir",
+    title: "Control de Autorizo y Contrato",
+    description: "Control de autorizos y contratos por ficha",
+    route: "/dashboard/control-autorizo",
   },
   {
     id: 5,
