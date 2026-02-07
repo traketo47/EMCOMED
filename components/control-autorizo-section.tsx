@@ -11,8 +11,17 @@ import { es } from "date-fns/locale"
 import type { Investment } from "@/app/dashboard/plan-inversion/page"
 import type { Autorizo } from "@/app/dashboard/modelo-autorizo/page"
 
+const PROVINCIAS_ENTIDADES = [
+  "Artemisa", "Aseguramiento", "BNT Santiago", "Camagüey", "Ciego de Ávila",
+  "Cienfuegos", "Granma", "Guantánamo", "Holguín", "Isla de la Juventud",
+  "La Habana", "Las Tunas", "Matanzas", "Mayabeque", "Operaciones",
+  "Pinar del Río", "Plataforma", "Sancti Spíritus", "Santiago de Cuba",
+  "Suministros Farmacéuticos", "Villa Clara",
+]
+
 type ControlAutorizoData = {
   autorizoId: number
+  ueb: string
   cyM: number
   equipo: number
   otros: number
@@ -148,6 +157,7 @@ export function ControlAutorizoSection() {
         ...prev,
         {
           autorizoId,
+          ueb: selectedFicha?.ueb || "",
           cyM: 0,
           equipo: 0,
           otros: 0,
@@ -163,6 +173,7 @@ export function ControlAutorizoSection() {
     return (
       controlData.find((d) => d.autorizoId === autorizoId) || {
         autorizoId,
+        ueb: selectedFicha?.ueb || "",
         cyM: 0,
         equipo: 0,
         otros: 0,
@@ -309,8 +320,24 @@ export function ControlAutorizoSection() {
                         <td className="border border-black p-2 text-center text-black whitespace-nowrap">
                           {format(fechaAutorizo, "d.MM.yyyy")}
                         </td>
-                        <td className="border border-black p-2 text-center text-black">
-                          {selectedFicha.ueb || "-"}
+                        <td className="border border-black p-1">
+                          <Select
+                            value={data.ueb || selectedFicha.ueb || ""}
+                            onValueChange={(value) =>
+                              handleControlDataChange(autorizo.id, "ueb", value)
+                            }
+                          >
+                            <SelectTrigger className="h-8 text-xs bg-white border-0 text-black">
+                              <SelectValue placeholder="Seleccionar UEB" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {PROVINCIAS_ENTIDADES.map((prov) => (
+                                <SelectItem key={prov} value={prov}>
+                                  {prov}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
                         </td>
                         <td className="border border-black p-1">
                           <Input

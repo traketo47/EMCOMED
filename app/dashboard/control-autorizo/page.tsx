@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useRouter } from "next/navigation"
 import { ControlAutorizoSection } from "@/components/control-autorizo-section"
+import { ControlContratoSection } from "@/components/control-contrato-section"
 
 export default function ControlAutorizoPage() {
   const router = useRouter()
@@ -63,7 +64,8 @@ export default function ControlAutorizoPage() {
             </Card>
 
             <Card
-              className="border-blue-500/30 bg-slate-800/80 backdrop-blur-sm shadow-lg opacity-60 cursor-not-allowed"
+              onClick={() => setView("contrato")}
+              className="border-blue-500/30 bg-slate-800/80 backdrop-blur-sm shadow-lg hover:shadow-blue-500/20 transition-all duration-300 hover:scale-[1.02] cursor-pointer hover:border-blue-400/50"
             >
               <CardHeader className="text-center">
                 <div className="mx-auto mb-4 w-16 h-16 bg-blue-600/20 rounded-full flex items-center justify-center">
@@ -74,7 +76,7 @@ export default function ControlAutorizoPage() {
                 <CardTitle className="text-xl text-white">Control de Contrato</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-blue-200 text-center">Próximamente - Control de contratos por ficha</p>
+                <p className="text-blue-200 text-center">Trazabilidad de contratos y autorizos por ficha</p>
               </CardContent>
             </Card>
           </div>
@@ -82,11 +84,7 @@ export default function ControlAutorizoPage() {
 
         {view === "autorizo" && <ControlAutorizoSection />}
 
-        {view === "contrato" && (
-          <div className="text-center text-blue-200">
-            <p>Control de Contrato - Próximamente</p>
-          </div>
-        )}
+        {view === "contrato" && <ControlContratoSection />}
       </div>
     </div>
   )
