@@ -58,7 +58,7 @@ class Ficha(models.Model):
     ueb = models.CharField(max_length=50, choices=UEB_CHOICES, blank=True, null=True)
     
     # Plan del Año (MCUP)
-    cyM = models.DecimalField(max_digits=15, decimal_places=2, default=0, validators=[MinValueValidator(0)])
+    cy_m = models.DecimalField(max_digits=15, decimal_places=2, default=0, validators=[MinValueValidator(0)])
     equipo = models.DecimalField(max_digits=15, decimal_places=2, default=0, validators=[MinValueValidator(0)])
     otros = models.DecimalField(max_digits=15, decimal_places=2, default=0, validators=[MinValueValidator(0)])
     ppt = models.DecimalField(max_digits=15, decimal_places=2, default=0, validators=[MinValueValidator(0)])
@@ -83,7 +83,7 @@ class Ficha(models.Model):
     @property
     def total(self):
         """Total = C y M + Equipo + Otros (no incluye Importacion ni FB)"""
-        return float(self.cyM) + float(self.equipo) + float(self.otros)
+        return float(self.cy_m) + float(self.equipo) + float(self.otros)
 
 
 class SubFicha(models.Model):
@@ -98,7 +98,7 @@ class SubFicha(models.Model):
     fundamentacion = models.TextField(blank=True)
     
     # Plan del Año
-    cyM = models.DecimalField(max_digits=15, decimal_places=2, default=0, validators=[MinValueValidator(0)])
+    cy_m = models.DecimalField(max_digits=15, decimal_places=2, default=0, validators=[MinValueValidator(0)])
     equipo = models.DecimalField(max_digits=15, decimal_places=2, default=0, validators=[MinValueValidator(0)])
     otros = models.DecimalField(max_digits=15, decimal_places=2, default=0, validators=[MinValueValidator(0)])
     ppt = models.DecimalField(max_digits=15, decimal_places=2, default=0, validators=[MinValueValidator(0)])
@@ -129,4 +129,4 @@ class SubFicha(models.Model):
     
     @property
     def total(self):
-        return float(self.cyM) + float(self.equipo) + float(self.otros)
+        return float(self.cy_m) + float(self.equipo) + float(self.otros)

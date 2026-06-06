@@ -4,7 +4,7 @@ from .models import ControlAutorizo, ControlContrato
 
 @admin.register(ControlAutorizo)
 class ControlAutorizoAdmin(admin.ModelAdmin):
-    list_display = ['autorizo', 'ueb', 'cyM', 'equipo', 'otros', 'financiamiento']
+    list_display = ['autorizo', 'ueb', 'cy_m', 'equipo', 'otros', 'financiamiento']
     list_filter = ['ueb']
 
 

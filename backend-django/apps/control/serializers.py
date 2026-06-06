@@ -15,6 +15,7 @@ class ControlAutorizoSerializer(serializers.ModelSerializer):
         source='autorizo.entidad_contratada.nombre', read_only=True
     )
     factura = serializers.CharField(source='autorizo.factura', read_only=True)
+    cyM = serializers.DecimalField(source='cy_m', max_digits=15, decimal_places=4, required=False)
     
     class Meta:
         model = ControlAutorizo

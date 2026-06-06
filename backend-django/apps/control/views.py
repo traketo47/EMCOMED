@@ -34,7 +34,7 @@ class ControlAutorizoViewSet(viewsets.ModelViewSet):
         # Plan (valores de la ficha)
         plan = {
             'total': ficha.total,
-            'cyM': float(ficha.cyM),
+            'cyM': float(ficha.cy_m),
             'equipo': float(ficha.equipo),
             'otros': float(ficha.otros),
         }
@@ -42,7 +42,7 @@ class ControlAutorizoViewSet(viewsets.ModelViewSet):
         # Comprometido (suma de autorizos relacionados)
         controles = ControlAutorizo.objects.filter(autorizo__ficha_id=ficha_id)
         comprometido = {
-            'cyM': sum(float(c.cyM) for c in controles),
+            'cyM': sum(float(c.cy_m) for c in controles),
             'equipo': sum(float(c.equipo) for c in controles),
             'otros': sum(float(c.otros) for c in controles),
         }

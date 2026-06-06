@@ -15,7 +15,7 @@ class ControlAutorizo(models.Model):
     ueb = models.CharField(max_length=50, blank=True)
     
     # Valores por componente (solo se edita el componente marcado en el autorizo)
-    cyM = models.DecimalField(max_digits=15, decimal_places=4, default=0, validators=[MinValueValidator(0)])
+    cy_m = models.DecimalField(max_digits=15, decimal_places=4, default=0, validators=[MinValueValidator(0)])
     equipo = models.DecimalField(max_digits=15, decimal_places=4, default=0, validators=[MinValueValidator(0)])
     otros = models.DecimalField(max_digits=15, decimal_places=4, default=0, validators=[MinValueValidator(0)])
     
@@ -78,7 +78,7 @@ class ControlContrato(models.Model):
         total = 0
         for autorizo in autorizos:
             if hasattr(autorizo, 'control'):
-                total += float(autorizo.control.cyM) + float(autorizo.control.equipo) + float(autorizo.control.otros)
+                total += float(autorizo.control.cy_m) + float(autorizo.control.equipo) + float(autorizo.control.otros)
         return total
     
     @property

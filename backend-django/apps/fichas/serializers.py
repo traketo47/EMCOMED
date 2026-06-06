@@ -4,6 +4,7 @@ from .models import Ficha, SubFicha
 
 class SubFichaSerializer(serializers.ModelSerializer):
     total = serializers.ReadOnlyField()
+    cyM = serializers.DecimalField(source='cy_m', max_digits=15, decimal_places=2, required=False)
     
     class Meta:
         model = SubFicha
@@ -17,6 +18,7 @@ class SubFichaSerializer(serializers.ModelSerializer):
 class FichaSerializer(serializers.ModelSerializer):
     subfichas = SubFichaSerializer(many=True, read_only=True)
     total = serializers.ReadOnlyField()
+    cyM = serializers.DecimalField(source='cy_m', max_digits=15, decimal_places=2, required=False)
     
     class Meta:
         model = Ficha
@@ -34,11 +36,11 @@ class FichaSerializer(serializers.ModelSerializer):
     def validate(self, data):
         # Validacion PPT vs otros campos
         ppt = float(data.get('ppt', 0))
-        cyM = float(data.get('cyM', 0))
+        cy_m = float(data.get('cy_m', 0))
         equipo = float(data.get('equipo', 0))
         otros = float(data.get('otros', 0))
         
-        if ppt > 0 and (cyM > 0 or equipo > 0 or otros > 0):
+        if ppt > 0 and (cy_m > 0 or equipo > 0 or otros > 0):
             raise serializers.ValidationError(
                 "Si PPT tiene valor, no se pueden llenar C y M, Equipo, Otros"
             )
